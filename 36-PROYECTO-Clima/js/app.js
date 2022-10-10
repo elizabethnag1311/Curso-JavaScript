@@ -68,24 +68,24 @@ function consultarApi(ciudad, pais) {
 
 function mostrarClima(datos) {
   const {name, main: {temp, temp_max, temp_min}} = datos;
-  const centigrados = klvnACentrigrados(temp);
-  const max = klvnACentrigrados(temp_max);
-  const min = klvnACentrigrados(temp_min);
+  const centigrados = Math.round(temp - 273.15);
+  const max = Math.round(temp_max - 273.15);
+  const min = Math.round(temp_min -273.15);
 
   const nombreCiudad = document.createElement('p');
   nombreCiudad.textContent = `Clima en ${name}`;
   nombreCiudad.classList.add('font-bold', 'text-2xl');
 
   const actual = document.createElement('p');
-  actual.innerHTML = `${centigrados} &#8451;`;
+  actual.textContent = `${centigrados} ºC`;
   actual.classList.add('font-bold', 'text-6xl');
 
   const tempMaxima = document.createElement('p');
-  tempMaxima.innerHTML = `Max: ${max} &#8451;`;
+  tempMaxima.textContent = `Max: ${max} ºC`;
   tempMaxima.classList.add('text-xl');
 
   const tempMinima = document.createElement('p');
-  tempMinima.innerHTML = `Max: ${min} &#8451;`;
+  tempMinima.textContent = `Max: ${min} ºC`;
   tempMinima.classList.add('text-xl');
 
   const resultadoDiv = document.createElement('div');
@@ -97,9 +97,6 @@ function mostrarClima(datos) {
 
   resultado.appendChild(resultadoDiv);
 }
-
-
-const klvnACentrigrados = grados => parseInt(grados - 273.15);
 
 
 function limpiarHtml() {
